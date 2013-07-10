@@ -140,16 +140,25 @@ imx () {
 	${git} "${DIR}/patches/imx/0005-thermal-add-imx-thermal-driver-support.patch"
 	#http://marc.info/?l=linux-arm-kernel&m=137286613127404&w=2
 	${git} "${DIR}/patches/imx/0006-ARM-mx6-Fix-the-number-of-reported-cores.patch"
-	${git} "${DIR}/patches/imx/0007-ARM-i.MX6-Wandboard-add-CKO1-clock-output.patch"
-	${git} "${DIR}/patches/imx/0008-ARM-i.MX6-Wandboard-add-wifi-bt-rfkill-driver.patch"
+	${git} "${DIR}/patches/imx/0007-i.MX6-Wandboard-add-CKO1-clock-output.patch"
+	${git} "${DIR}/patches/imx/0008-i.MX6-Wandboard-add-wifi-bt-rfkill-driver.patch"
 }
 
 dts () {
 	echo "dir: dts"
 	${git} "${DIR}/patches/dts/0001-wandboard-add-quad-plus-2nd-mmc-card.patch"
-	${git} "${DIR}/patches/dts/0002-ARM-DT-i.MX6-Wandboard-add-sound-stgl5000-and-wifi-b.patch"
-}
+	${git} "${DIR}/patches/dts/0002-arm-imx6dl.dtsi-add-audmux-from-v3.11-rc0.patch"
+	${git} "${DIR}/patches/dts/0003-ARM-dts-imx6dl-wandboard-Add-audio-support.patch"
+	${git} "${DIR}/patches/dts/0004-ARM-dts-imx6q-wandboard-Add-audio-support.patch"
+	${git} "${DIR}/patches/dts/0005-mainline-sync-imx6q-dl-wandboard.dts-remove-usdhc1.patch"
+	${git} "${DIR}/patches/dts/0006-ARM-dts-imx6dl-wandboard-Add-SDHC1-and-SDHC2-ports.patch"
+	${git} "${DIR}/patches/dts/0007-ARM-dts-imx6q-wandboard-Add-SDHC1-and-SDHC2-ports.patch"
+	${git} "${DIR}/patches/dts/0008-ARM-dts-imx6dl-wandboard-Add-support-for-UART3.patch"
+	${git} "${DIR}/patches/dts/0009-ARM-dts-imx6q-wandboard-Add-support-for-UART3.patch"
 
+#wip:
+#	${git} "${DIR}/patches/dts/0010-i.MX6-Wandboard-add-sound-stgl5000-and-wifi-bt.patch"
+}
 
 arm
 omap
