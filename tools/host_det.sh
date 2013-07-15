@@ -177,7 +177,7 @@ debian_regs () {
 
 		#pkg: libncurses5-dev
 		case "${deb_distro}" in
-		squeeze|lucid|precise|raring)
+		squeeze|lucid|precise)
 			#ii  libncurses5-dev  5.9-4  developer's libraries for ncurses
 			pkg="libncurses5-dev"
 			dpkg -l | awk '{print $2}' | grep "^${pkg}" >/dev/null || deb_pkgs="${deb_pkgs}${pkg} "
