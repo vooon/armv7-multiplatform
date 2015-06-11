@@ -288,6 +288,10 @@ debian_regs () {
 		squeeze|wheezy|jessie|sid)
 			unset warn_eol_distro
 			;;
+		vivid)
+			# 15.04
+			unset warn_eol_distro
+			;;
 		utopic)
 			#14.10
 			unset warn_eol_distro
@@ -348,7 +352,7 @@ debian_regs () {
 
 		#Libs; starting with jessie/sid/saucy, lib<pkg_name>-dev:<arch>
 		case "${deb_distro}" in
-		jessie|sid|saucy|trusty|utopic)
+		jessie|sid|saucy|trusty|utopic|vivid)
 			pkg="libncurses5-dev:${deb_arch}"
 			check_dpkg
 			;;
