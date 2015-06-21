@@ -1,0 +1,93 @@
+From d57dc7381f1110f8581311a597fe02074e89361e Mon Sep 17 00:00:00 2001
+From: Vladimir Ermakov <vooon341@gmail.com>
+Date: Thu, 11 Jun 2015 13:30:38 +0300
+Subject: [PATCH] dts: imx6q: Add Wandboard variant with UART2 mapped to GPIO
+ header.
+
+Signed-off-by: Vladimir Ermakov <vooon341@gmail.com>
+---
+ arch/arm/boot/dts/Makefile                  |  1 +
+ arch/arm/boot/dts/imx6q-wandboard-uart2.dts | 59 +++++++++++++++++++++++++++++
+ 2 files changed, 60 insertions(+)
+ create mode 100644 arch/arm/boot/dts/imx6q-wandboard-uart2.dts
+
+diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
+index 9293238..1cf142c 100644
+--- a/arch/arm/boot/dts/Makefile
++++ b/arch/arm/boot/dts/Makefile
+@@ -190,6 +190,7 @@ dtb-$(CONFIG_ARCH_MXC) += \
+ 	imx6q-sbc6x.dtb \
+ 	imx6q-udoo.dtb \
+ 	imx6q-wandboard.dtb \
++	imx6q-wandboard-uart2.dtb \
+ 	imx6sl-evk.dtb \
+ 	vf610-cosmic.dtb \
+ 	vf610-twr.dtb
+diff --git a/arch/arm/boot/dts/imx6q-wandboard-uart2.dts b/arch/arm/boot/dts/imx6q-wandboard-uart2.dts
+new file mode 100644
+index 0000000..036f132
+--- /dev/null
++++ b/arch/arm/boot/dts/imx6q-wandboard-uart2.dts
+@@ -0,0 +1,59 @@
++/*
++ * Copyright 2013 Freescale Semiconductor, Inc.
++ *
++ * Author: Fabio Estevam <fabio.estevam@freescale.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License version 2 as
++ * published by the Free Software Foundation.
++ *
++ */
++/dts-v1/;
++#include "imx6q.dtsi"
++#include "imx6qdl-wandboard.dtsi"
++
++/ {
++	model = "Wandboard i.MX6 Quad Board (UART2)";
++	compatible = "wand,imx6q-wandboard", "fsl,imx6q";
++
++	memory {
++		reg = <0x10000000 0x80000000>;
++	};
++};
++
++&sata {
++	status = "okay";
++};
++
++&iomuxc {
++	imx6qdl-wandboard {
++		pinctrl_uart2: uarg2grp {
++			fsl,pins = <
++				MX6QDL_PAD_EIM_D26__UART2_TX_DATA 0x1b0b1
++				MX6QDL_PAD_EIM_D27__UART2_RX_DATA 0x1b0b1
++			>;
++		};
++	};
++};
++
++&uart2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart2>;
++	status = "okay";
++};
++
++/* comment out UART2 pins */
++&pinctrl_gpio {
++	fsl,pins = <
++		MX6QDL_PAD_EIM_DA12__GPIO3_IO12   0x80000000 /* GPIO3_12 EDM pin 255 */
++		MX6QDL_PAD_EIM_DA11__GPIO3_IO11   0x80000000 /* GPIO3_11 EDM pin 256 */
++		MX6QDL_PAD_EIM_DA10__GPIO3_IO10   0x80000000 /* GPIO3_10 EDM pin 257 */
++		/* UART2 RX MX6QDL_PAD_EIM_D27__GPIO3_IO27    0x80000000 *//* GPIO3_27 EDM pin 258 */
++		/* UART2 TX MX6QDL_PAD_EIM_D26__GPIO3_IO26    0x80000000 *//* GPIO3_26 EDM pin 259 */
++		MX6QDL_PAD_EIM_BCLK__GPIO6_IO31   0x80000000 /* GPIO6_31 EDM pin 260 */
++		MX6QDL_PAD_EIM_DA8__GPIO3_IO08    0x80000000 /* GPIO3_8  EDM pin 261 */
++		MX6QDL_PAD_ENET_RX_ER__GPIO1_IO24 0x80000000 /* GPIO1_24 EDM pin 262 */
++		MX6QDL_PAD_GPIO_19__GPIO4_IO05    0x80000000 /* GPIO4_5  EDM pin 263 */
++		MX6QDL_PAD_SD3_RST__GPIO7_IO08    0x80000000 /* GPIO7_8  EDM pin 264 */
++	>;
++};
+-- 
+2.1.4
+
